@@ -7,7 +7,7 @@
 //! # Example
 //!
 //! ```rust
-//! use signal::Signal;
+//! use sssignal::Signal;
 //!
 //! let mut signal = Signal::new(0);
 //!
@@ -50,7 +50,7 @@ impl<T> Signal<T> {
 	/// # Example
 	///
 	/// ```rust
-	/// # use signal::Signal;
+	/// # use sssignal::Signal;
 	/// let mut signal = Signal::new(42);
 	/// signal.set(43);
 	/// ```
@@ -68,7 +68,7 @@ impl<T> Signal<T> {
 	/// # Example
 	///
 	/// ```rust
-	/// # use signal::Signal;
+	/// # use sssignal::Signal;
 	/// let mut signal = Signal::new(42);
 	///
 	/// signal.on_change(|new, old| {
@@ -98,7 +98,7 @@ impl<T> Signal<T> {
 	/// # Example
 	///
 	/// ```rust
-	/// # use signal::Signal;
+	/// # use sssignal::Signal;
 	/// let signal = Signal::new(42);
 	/// let mapped_signal = signal.map(|value| value.to_string());
 	/// ```
