@@ -29,7 +29,7 @@ fn main() {
 
     signal.set(43); // Prints "Value changed from 42 to 43"
 
-	println!("{}", signal); // Prints "Signal(43)"
+    println!("{}", signal); // Prints "Signal(43)"
 }
 ```
 
