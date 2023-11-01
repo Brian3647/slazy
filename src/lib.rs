@@ -47,7 +47,7 @@ impl<T> Signal<T> {
 	/// Gets a reference to the value of the signal.
 	/// This is useful if you want to read the value without changing it.
 	/// If you want to change the value, use `set` instead.
-	pub fn get(&self) -> &T {
+	pub fn value(&self) -> &T {
 		&self.value
 	}
 
@@ -117,7 +117,7 @@ impl<T> Signal<T> {
 impl<T: Copy> Signal<T> {
 	/// Gets a copy of the value of the signal.
 	/// If you want to change the value, use `set` instead.
-	pub fn value(&self) -> T {
+	pub fn value_copy(&self) -> T {
 		self.value
 	}
 }
@@ -209,5 +209,12 @@ mod tests {
 	fn test_default_trait() {
 		let default_signal: Signal<i32> = Default::default();
 		assert_eq!(default_signal.value, 0);
+	}
+
+	#[test]
+	fn test_get() {
+		let signal = Signal::new(42);
+		assert_eq!(*signal.value(), 42);
+		assert_eq!(signal.value_copy(), 42);
 	}
 }
