@@ -26,7 +26,7 @@ pub type Handler<T> = Box<dyn FnMut(&T, &T)>;
 /// A generic signal that holds a value of type `T` and allows you to react to changes in the value.
 pub struct Signal<T> {
 	/// The current value of the signal.
-	pub value: T,
+	value: T,
 	/// The callback function that is called whenever the value changes.
 	on_change: Option<Handler<T>>,
 }
@@ -42,6 +42,13 @@ impl<T> Signal<T> {
 			value: default,
 			on_change: None,
 		}
+	}
+
+	/// Gets a reference to the value of the signal.
+	/// This is useful if you want to read the value without changing it.
+	/// If you want to change the value, use `set` instead.
+	pub fn get(&self) -> &T {
+		&self.value
 	}
 
 	/// Sets the value of the signal.
@@ -104,6 +111,14 @@ impl<T> Signal<T> {
 	/// ```
 	pub fn map<U, F: Fn(&T) -> U>(&self, f: F) -> Signal<U> {
 		Signal::new(f(&self.value))
+	}
+}
+
+impl<T: Copy> Signal<T> {
+	/// Gets a copy of the value of the signal.
+	/// If you want to change the value, use `set` instead.
+	pub fn value(&self) -> T {
+		self.value
 	}
 }
 
