@@ -1,0 +1,11 @@
+[package]
+name = "sssignals"
+version = "0.1.0"
+edition = "2021"
+authors = ["Brian3647 <victoris3647@gmail.com>"]
+repository = "https://github.com/Brian3647/sssignals"
+license = "MIT"
+description = "🐍 Simple, Synchronous Reactive Signals for Rust"
+include = ["README.md", "LICENSE", "Cargo.toml", "src/lib.rs"]
+
+[dependencies]
