@@ -9,9 +9,10 @@
 /// use slazy::slazy;
 ///
 /// slazy! {
-///     pub public_var: ty = value;
+///     pub public_var: String = String::from("Hello, world!");
 ///     non_public_example: u32 = 42;
 /// }
+/// ```
 #[macro_export]
 macro_rules! slazy {
     (pub $name:ident: $type:ty = $val:expr; $($rest:tt)*) => {
