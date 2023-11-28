@@ -1,11 +1,11 @@
 [package]
-name = "sssignals"
-version = "0.2.1"
+name = "slazy"
+version = "0.1.0"
 edition = "2021"
 authors = ["Brian3647 <victoris3647@gmail.com>"]
-repository = "https://github.com/Brian3647/sssignals"
+repository = "https://github.com/Brian3647/slazy"
 license = "MIT"
-description = "🐍 Simple, Synchronous Reactive Signals for Rust"
+description = "A simple signal for lazy loading."
 include = ["README.md", "LICENSE", "Cargo.toml", "src/lib.rs"]
 
 [dependencies]

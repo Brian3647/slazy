@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "sssignals"
-version = "0.2.1"
+name = "slazy"
+version = "0.1.0"

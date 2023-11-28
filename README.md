@@ -1,55 +1,71 @@
-# 🐍 SSSignals: Simple, Synchronous Reactive Signals for Rust
+<div align="center">
 
-![License](https://img.shields.io/github/license/Brian3647/sssignals)
-![GitHub issues](https://img.shields.io/github/issues/Brian3647/sssignals)
-![Build status](https://img.shields.io/github/actions/workflow/status/Brian3647/sssignals/rust.yml)
+# SLazy 💄
 
-SSSignals is a lightweight Rust library that provides simple, synchronous reactive signals. Signals are a powerful way to react to changes in values and design event-driven systems. With SSSignals, you can easily incorporate reactive programming into your Rust applications.
+![License](https://img.shields.io/github/license/Brian3647/slazy)
+![GitHub issues](https://img.shields.io/github/issues/Brian3647/slazy)
+![Build status](https://img.shields.io/github/actions/workflow/status/Brian3647/slazy/rust.yml)
 
-\[[Request a feature/Report a bug](https://github.com/Brian3647/sssignals/issues)\]
+A simple, small, no-std, macro-based lazy static library for Rust.
 
-## Features
+[\[Request a feature/report a bug\]](https://github.com/Brian3647/slazy)
 
--   📡 **Signal Creation**: Create signals to hold values of any data type.
--   🔄 **Value Change Callbacks**: Register callbacks that are triggered when the signal's value changes.
--   🗺 **Value Transformation**: Map the signal's value to a new value using a provided mapping function.
--   🎯 **Trait Implementations**: Implements common Rust traits such as `Display`, `Debug`, and `Default`.
-
-## Usage
-
-```rust
-use sssignals::Signal;
-
-fn main() {
-    let mut signal = Signal::new(42);
-
-    signal.on_change(|new, old| {
-        println!("Value changed from {} to {}", old, new);
-    });
-
-    signal.set(43); // Prints "Value changed from 42 to 43"
-
-    println!("{}", signal); // Prints "Signal(43)"
-}
-```
+</div>
 
 ## Installation
 
-Run `cargo add sssignals` or add the following to your `Cargo.toml` file:
+`cargo add slazy` or by adding the following to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-sssignals = "*"
+slazy = "*"
 ```
 
-## Documentation
+## Examples
 
-For detailed information on how to use SSSignals, please refer to [the official documentation](https://docs.rs/sssignals).
+```rust
+use slazy::slazy;
 
-## Contributing
+slazy! {
+    pub FOO: u32 = {
+        println!("Evaluating FOO");
+        42
+    };
 
-We welcome contributions from the open-source community. If you'd like to report a bug, request a feature, or contribute to the project, you can use the set templates.
+    BAR: u32 = 1337;
+}
+
+println!("FOO: {}", *FOO); // Evaluates FOO
+println!("{}", *FOO); // Gets the value of FOO without evaluating it again
+println!("{}", *BAR); // Evaluates BAR
+```
+
+## Thread safety
+
+> [!WARNING]
+> If you want to use SLazy in a multi-threaded environment, you should initialize
+> the lazy statics before spawning any threads. This is because the lazy statics
+> might not be thread safe in certain scenarios due to data races.
+
+### Example
+
+```rust
+use slazy::{slazy, init};
+
+slazy! {
+    pub FOO: u32 = {
+        println!("Evaluating FOO");
+        42
+    };
+}
+
+init!(FOO); // or `_ = *FOO;`
+
+std::thread::spawn(|| {
+    println!("{}", *FOO); // Safe to use FOO in this thread
+});
+```
 
 ## License
 
-This project is licensed under the MIT License - see [the LICENSE file](/LICENSE) for details.
+This project is licensed under the [MIT license](LICENSE).
